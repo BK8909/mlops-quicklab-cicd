@@ -1,4 +1,3 @@
-
 name: Deployment
 
 on:
@@ -71,12 +70,11 @@ jobs:
           docker push $REGION-docker.pkg.dev/$PROJECT_ID/$ARTIFACT_REPO_NAME/$CUSTOM_IMAGE:${{ steps.slug.outputs.sha }}
 
   deploy-to-vertex-ai:
-
     runs-on: ubuntu-latest
     needs: deploy-to-artifact-repository
     steps:
       - name: Checkout code
-      uses: actions/checkout@v3
+        uses: actions/checkout@v3
       - name: Free disk space
         run: |
           sudo docker rmi $(docker image ls -aq) >/dev/null 2>&1 || true
